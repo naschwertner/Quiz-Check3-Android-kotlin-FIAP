@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.nathaliariegler_rm87498.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_questaoFragment"
+            app:destination="@id/questaoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questaoFragment"
+        android:name="com.example.nathaliariegler_rm87498.QuestaoFragment"
+        android:label="fragment_questao"
+        tools:layout="@layout/fragment_questao" >
+        <action
+            android:id="@+id/action_questaoFragment_to_acertouFragment"
+            app:destination="@id/acertouFragment" />
+        <action
+            android:id="@+id/action_questaoFragment_to_errouFragment"
+            app:destination="@id/errouFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/acertouFragment"
+        android:name="com.example.nathaliariegler_rm87498.AcertouFragment"
+        android:label="fragment_acertou"
+        tools:layout="@layout/fragment_acertou" >
+        <action
+            android:id="@+id/action_acertouFragment_to_questaoFragment"
+            app:destination="@id/questaoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/errouFragment"
+        android:name="com.example.nathaliariegler_rm87498.ErrouFragment"
+        android:label="fragment_errou"
+        tools:layout="@layout/fragment_errou" >
+        <action
+            android:id="@+id/action_errouFragment_to_questaoFragment"
+            app:destination="@id/questaoFragment" />
+    </fragment>
+</navigation>
