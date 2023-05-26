@@ -1,3 +1,4 @@
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -6,59 +7,45 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.nathaliariegler_rm87498.AlternativaModel
 import com.example.nathaliariegler_rm87498.QuestaoModel
-import com.example.nathaliariegler_rm87498.databinding.FragmentQuestaoBinding
+import kotlinx.android.synthetic.main.fragment_quiz_game.*
+
 
 class QuestaoFragment : Fragment() {
 
-    private lateinit var questoes: MutableList<QuestaoModel>
-    private lateinit var binding: FragmentQuestaoBinding
-    private var currentQuestionIndex = 0
+    private lateinit var questoes: MutableList<QuestaoFragment>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentQuestaoBinding.inflate(inflater, container, false)
-        val view = binding.root
+    ): View? {
+
+        val view = inflater.inflate(R.layout.fragment_questao, container, false)
 
         // Carrega as questões
         carregarQuestoes()
 
         // Exibe a primeira questão
-        displayQuestion()
+        val primeiraQuestao = questoes[0]
+        val questionTitle: TextView = view.findViewById(R.id.questionTitle)
+        questionTitle.text = primeiraQuestao.pergunta
 
-        binding.btnSubmit.setOnClickListener {
-            val selectedOptionId = binding.radioGroup.checkedRadioButtonId
-            val selectedAnswer = when (selectedOptionId) {
-                R.id.option1 -> questoes[currentQuestionIndex].alternativas[0]
-                R.id.option2 -> questoes[currentQuestionIndex].alternativas[1]
-                R.id.option3 -> questoes[currentQuestionIndex].alternativas[2]
-                R.id.option4 -> questoes[currentQuestionIndex].alternativas[3]
-                else -> null
-            }
-
-            if (selectedAnswer != null && selectedAnswer.isCorrect) {
-                findNavController().navigate(R.id.action_questaoFragment_to_acertouFragment)
-            } else {
-                findNavController().navigate(R.id.action_questaoFragment_to_errouFragment)
-            }
+        // Exibe as alternativas
+        val radioGroup: RadioGroup = view.findViewById(R.id.radioGroup)
+        for (i in 0 until radioGroup.childCount) {
+            val radioButton = radioGroup.getChildAt(i) as RadioButton
+            radioButton.text = primeiraQuestao.alternativas[i].resposta
         }
+
 
         return view
     }
 
-    private fun displayQuestion() {
-        val currentQuestion = questoes[currentQuestionIndex]
-        binding.questionTitle.text = currentQuestion.pergunta
 
-        for (i in 0 until binding.radioGroup.childCount) {
-            val radioButton = binding.radioGroup.getChildAt(i) as RadioButton
-            radioButton.text = currentQuestion.alternativas[i].resposta
-        }
-    }
+
 
     private fun carregarQuestoes() {
         questoes = mutableListOf()
@@ -87,4 +74,10 @@ class QuestaoFragment : Fragment() {
         val alternativas3 = mutableListOf(
             AlternativaModel("Rio de Janeiro", false),
             AlternativaModel("São Paulo", false),
-            Altern
+            AlternativaModel("Brasília", true),
+            AlternativaModel("Belo Horizonte", false)
+        )
+        val questao3 = QuestaoModel("Qual é a capital do Brasil?", alternativas3)
+        questoes.add(questao3)
+    }
+}
