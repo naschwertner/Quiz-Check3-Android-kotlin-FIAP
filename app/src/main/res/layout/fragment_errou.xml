@@ -20,6 +20,7 @@
         </ImageView>
 
         <TextView
+            android:id="@+id/wrongTitle"
             style="@style/MediumTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,12 +33,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
-            android:text="Tentar Novamente">
+            android:text="Tentar Novamente"
+            android:layout_below="@id/wrongTitle">
 
         </Button>
 
 
-    </ScrollView>
+
 
     </LinearLayout>
 </layout>

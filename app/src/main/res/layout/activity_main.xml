@@ -18,4 +18,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:navGraph="@navigation/my_nav"
         tools:layout_editor_absoluteY="1dp" />
+
+
+    <fragment
+        android:id="@id/navHostFragment"
+        android:layout_with="0dp"
+        android:layout_height="0dp"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/fragment_nav_graph"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

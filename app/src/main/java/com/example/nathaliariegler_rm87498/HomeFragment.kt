@@ -17,12 +17,18 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        val button = view.findViewById<Button>(R.id.homeFragment)
+
+        // Encontra o botão no layout
+        val button = view.findViewById<Button>(R.id.startBtn)
+
+        // Define um OnClickListener no botão
         button.setOnClickListener {
+            // Navega para a fragmento "Questões" quando o botão é clicado
             findNavController().navigate(R.id.action_homeFragment_to_questaoFragment)
         }
+
 
         return view
     }
